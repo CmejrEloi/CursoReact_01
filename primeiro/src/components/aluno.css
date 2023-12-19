@@ -1,0 +1,15 @@
+.alunoContainer{
+    border: solid 1px #ccc;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 350px;
+}
+
+.imgAluno{
+    width: 180px;
+    padding: 10px;
+    border-bottom: #ccc solid 1px;
+}
+
