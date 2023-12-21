@@ -14,6 +14,31 @@ export default function App() {
 
   const [infoAluno, setInfoAluno] = useState<infoAlunoProps>();
 
+  /**Praticando */
+  interface userProps {
+    nome: string;
+    cargo: string;
+  }
+  const [user, setUser] = useState<userProps>({
+    nome: "Visitante",
+    cargo: ""
+  });
+
+  function handleLogin() {
+    setUser({
+      nome: "Claudio Junior",
+      cargo: "Analista de Qualidade"
+    })
+  }
+
+  function handleLogout() {
+    setUser({
+      nome: "Visitante",
+      cargo: ""
+    })
+  }
+  /**Fm Praticandp */
+
   function mostrarAluno() {
     setInfoAluno({
       nome: input,
@@ -21,12 +46,12 @@ export default function App() {
     })
   }
 
-  function adicionar(){
+  function adicionar() {
     setCount(valorAtual => valorAtual + 1)
   }
 
-  function diminuir(){
-    if(count == 0){
+  function diminuir() {
+    if (count == 0) {
       return;
     }
     setCount(valorAtual => valorAtual - 1)
@@ -48,6 +73,15 @@ export default function App() {
       <br />
       <h1>Contador com UseState</h1>
       <button onClick={adicionar}>+</button> {count} <button onClick={diminuir}>-</button>
+
+      <hr /><hr />
+      <h1>Praticando useState </h1>
+
+      <button onClick={handleLogout}>Sair</button>
+      <h4>Olá, {user.nome}</h4>
+      <strong>{user.cargo}</strong>
+      <br /><br />
+      <button onClick={handleLogin}>Entrar</button>
     </div>
   )
 }
