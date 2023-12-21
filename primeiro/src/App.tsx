@@ -1,21 +1,53 @@
-import Header from "./components/header";
-import Aluno from "./components/aluno";
-import Footer from "./components/footer";
-
-/**CSS */
-import './App.css'
+import { useState } from "react"
 
 export default function App() {
+
+  interface infoAlunoProps {
+    nome: string;
+    idade: string;
+  }
+
+  const [input, setInput] = useState("");
+  const [idade, setIdade] = useState("");
+
+  const [count, setCount] = useState(0)
+
+  const [infoAluno, setInfoAluno] = useState<infoAlunoProps>();
+
+  function mostrarAluno() {
+    setInfoAluno({
+      nome: input,
+      idade: idade
+    })
+  }
+
+  function adicionar(){
+    setCount(valorAtual => valorAtual + 1)
+  }
+
+  function diminuir(){
+    if(count == 0){
+      return;
+    }
+    setCount(valorAtual => valorAtual - 1)
+  }
+
   return (
     <div>
-      <Header />
+      <h1>Conhecendo UseState</h1>
+      <input type="text" placeholder="Digite o nome" value={input} onChange={(e) => setInput(e.target.value)} />
+      <br /><br />
+      <input type="text" placeholder="Digite a idade" value={idade} onChange={(e) => setIdade(e.target.value)} />
+      <br /><br />
+      <button onClick={mostrarAluno}>Mostrar Aluno</button>
+      <hr />
+      <h1>Bem vindo: {infoAluno?.nome}</h1>
+      <h3>Idade: {infoAluno?.idade}</h3>
 
-      <div className='alunos_box'>
-        <Aluno nome="Cláudio Junior" idade={42} />
-        <Aluno nome="Cristina Coelho" idade={63} />
-      </div>
-
-      <Footer />
+      <hr />
+      <br />
+      <h1>Contador com UseState</h1>
+      <button onClick={adicionar}>+</button> {count} <button onClick={diminuir}>-</button>
     </div>
   )
 }
