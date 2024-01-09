@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import './App.css'
 
 function App() {
   const [input, setInput] = useState('');
@@ -14,14 +15,14 @@ function App() {
 
   useEffect(() => {
     const tarefasSalvas = localStorage.getItem("@cursoreact")
-    if(tarefasSalvas){
+    if (tarefasSalvas) {
       setTasks(JSON.parse(tarefasSalvas))
     }
   }, [])
 
   const firstRender = useRef(true);
-  useEffect( () => {
-    if(firstRender.current){
+  useEffect(() => {
+    if (firstRender.current) {
       firstRender.current = false;
       return
     }
@@ -31,13 +32,13 @@ function App() {
   /**useRef */
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function handleRegister(){
-    if(!input){
+  const handleRegister = useCallback(() => {
+    if (!input) {
       alert('Informe a sua nova tarefa')
       return;
     }
 
-    if(editTask.enabled){
+    if (editTask.enabled) {
       handleSaveEdit();
       return;
     }
@@ -45,31 +46,32 @@ function App() {
     setTasks(tarefas => [...tarefas, input])
     setInput("")
     // localStorage.setItem("@cursoreact", JSON.stringify([...tasks, input]))
-  }
 
-  function handleSaveEdit(){
-     const findIndexTask = tasks.findIndex(task => task === editTask.task)
-     const allTasks = [...tasks]
+  }, [input, tasks])
 
-     allTasks[findIndexTask] = input
-     setTasks(allTasks)
+  function handleSaveEdit() {
+    const findIndexTask = tasks.findIndex(task => task === editTask.task)
+    const allTasks = [...tasks]
 
-     setEditTask({
+    allTasks[findIndexTask] = input
+    setTasks(allTasks)
+
+    setEditTask({
       enabled: false,
       task: ''
-     })
+    })
 
-     setInput('')
+    setInput('')
     //  localStorage.setItem("@cursoreact", JSON.stringify(allTasks))
   }
 
-  function handleDelete(item: string){
+  function handleDelete(item: string) {
     const removeTask = tasks.filter(task => task !== item);
     setTasks(removeTask)
     // localStorage.setItem("@cursoreact", JSON.stringify(removeTask))
   }
 
-  function handleEdit(item: string){
+  function handleEdit(item: string) {
     setInput(item)
     setEditTask({
       enabled: true,
@@ -79,22 +81,29 @@ function App() {
     inputRef.current?.focus();
   }
 
+  const totalTarefas = useMemo(() => {
+    return tasks.length
+  }, [tasks])
+
   return (
     <div>
       <h1>Lista - Formulários</h1>
-      <input type="text" placeholder='Informa a tarefa' 
-      value={input} onChange={ (e) => setInput(e.target.value)} ref={inputRef} />
+      <input type="text" placeholder='Informa a tarefa'
+        value={input} onChange={(e) => setInput(e.target.value)} ref={inputRef} />
 
       <button onClick={handleRegister}>
         {editTask.enabled ? "Atualizar" : "Adicionar"}
       </button>
       <hr />
 
+      <strong>Vicê tem {totalTarefas} tarefas!</strong>
+
+      <hr />
       {tasks.map((item, index) => (
-        <section key={item}>
+        <section key={item} className='box-tasks'>
           <span>{item}</span>
-          <button onClick={ () => handleEdit (item)}>Editar</button>
-          <button onClick={ () => handleDelete (item)}>Excluir</button>
+          <button onClick={() => handleEdit(item)}>Editar</button>
+          <button onClick={() => handleDelete(item)}>Excluir</button>
         </section>
       ))}
     </div>

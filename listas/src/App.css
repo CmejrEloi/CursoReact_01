@@ -1,0 +1,31 @@
+.box-tasks{
+    border: solid 1px #ccc;
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.box-tasks span{
+    width: 70%;
+    border-right: #ccc solid 1px;
+}
+
+.box-tasks button{
+    width: 15%;
+    margin-left: 15px;
+    border: none;
+    padding: 15px;
+    background-color: rgb(1, 79, 79);
+    color: #FFF;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.box-tasks button:hover{
+    transition: .5s;
+    background-color: rgb(7, 100, 69);
+}
