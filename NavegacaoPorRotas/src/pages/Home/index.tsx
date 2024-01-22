@@ -7,7 +7,15 @@ export function Home(){
             <span>Essa é minha primeira página com navegação</span>
             <hr />
 
-            <Link to="/sobre">
+            <Link to="/sobre" className="link-nav">
+                Sobre
+            </Link>
+
+            <Link to="/contato" className="link-nav">
+                Contato
+            </Link>
+
+            <Link to="/sobre" className="link-nav">
                 Sobre
             </Link>
         </div>
