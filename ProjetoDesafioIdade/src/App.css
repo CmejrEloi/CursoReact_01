@@ -1,0 +1,49 @@
+div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main{
+  width: 450px;
+  padding-top: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  color: #FFF;
+}
+
+.box-form{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #FFF;
+  margin: 25px 0 25px 0;
+  width: 90%;
+  border-radius: 5px;
+}
+
+.box-form input{
+  margin: 5px 0 5px 0;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.box-form button{
+  padding: 10px;
+  border: none;
+  background-color: aquamarine;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.result{
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFF;
+  border-bottom: solid 1px #FFF;
+  width: 100%;
+  padding: 15px;
+}
